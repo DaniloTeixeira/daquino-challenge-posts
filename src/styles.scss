@@ -1,0 +1,49 @@
+@import "src/assets/scss/variables.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  background-color: $accent-50;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.color-accent-200 {
+  color: $accent-200;
+}
+
+.color-accent-500 {
+  color: $accent-500;
+}
+
+.color-accent-800 {
+  color: $accent-800;
+}
+
+.fw-100 {
+  font-weight: 100;
+}
+
+.fw-400 {
+  font-weight: 400;
+}
+
+.fw-500 {
+  font-weight: 500;
+}
+
+.fw-600 {
+  font-weight: 600;
+}
+
+.border-bottom {
+  border-bottom: 1px solid $accent-200;
+}
