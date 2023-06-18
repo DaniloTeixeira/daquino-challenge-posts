@@ -1,0 +1,54 @@
+<div class="post-container">
+  <mat-card>
+    <div class="post-container-img">
+      <img [src]="post.image" loading="lazy" />
+    </div>
+    <div class="d-flex flex-column justify-content-between m-3">
+      <div class="img-text-container">
+        <a mat-button class="go-back-container" routerLink="../">
+          <mat-icon class="me-1 mb-1">arrow_back</mat-icon>
+          <small>Go back to post list</small>
+        </a>
+        <h1>{{ post.title }}</h1>
+        <p>
+          Written by:
+          <a mat-button class="user-name" (click)="goToUserDetails(post)">
+            {{ post.author.name }}</a
+          >
+        </p>
+        <small>{{ post.comments.length }} comments</small>
+        <br />
+      </div>
+      <div class="body-container">
+        <p>
+          {{ post.body }}
+        </p>
+
+        <h6 class="mt-5">Comments:</h6>
+
+        <ng-container *ngIf="post.comments.length; else noComments">
+          <ng-container *ngFor="let comment of post.comments; last as isLast">
+            <div class="author-info-container">
+              <div [ngClass]="!isLast ? 'border-bottom' : ''">
+                <div class="mt-4 mb-2">
+                  <div class="d-flex align-items-center">
+                    <div class="profile-photo" loading="lazy"></div>
+                    <div>
+                      <p class="author-name">{{ comment.author.name }}</p>
+                      <small>{{ comment.author.job }}</small>
+                    </div>
+                  </div>
+                </div>
+                <p class="comment ms-2 mb-4">{{ comment.comment }}</p>
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
+
+        <ng-template #noComments>
+          <small class="no-comments">Post has no comments.</small>
+        </ng-template>
+      </div>
+    </div>
+  </mat-card>
+</div>

@@ -1,0 +1,82 @@
+<div class="user-container" *ngIf="postData">
+  <mat-card>
+    <div class="header-content mt-3">
+      <div class="author-info">
+        <div class="profile-photo" loading="lazy"></div>
+        <div>
+          <p class="color-accent-800 fw-500">{{ post.author.name }}</p>
+          <p class="color-accent-500">{{ post.author.job }}</p>
+        </div>
+      </div>
+      <a mat-button class="go-back-container" routerLink="../">
+        <mat-icon class="me-1">arrow_back</mat-icon>
+        <small>Go back to post list</small>
+      </a>
+    </div>
+
+    <div class="mt-4">
+      <h6 class="color-accent-800 fw-400">
+        All Posts from {{ post.author.name }}
+      </h6>
+    </div>
+
+    <div class="post-container">
+      <ng-container *ngFor="let data of postData">
+        <div class="post-content">
+          <div class="img-container">
+            <img [src]="data.image" />
+          </div>
+
+          <div class="d-flex flex-column justify-content-between m-3">
+            <div>
+              <h5>{{ data.title }}</h5>
+              <small class="author-name">By: {{ data.author.name }}</small>
+            </div>
+            <small class="body">
+              {{ data.body }}
+            </small>
+            <div class="text-end mt-1">
+              <button
+                mat-raised-button
+                color="primary"
+                (click)="goToPostDetails(data)"
+              >
+                READ
+              </button>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <h6 class="mt-5">Comments from {{ post.author.name }}:</h6>
+
+    <ng-container *ngIf="post.comments.length; else noComments">
+      <ng-container *ngFor="let comment of post.comments; last as isLast">
+        <div class="author-info-container">
+          <div [ngClass]="!isLast ? 'border-bottom' : ''">
+            <div>
+              <div class="d-flex align-items-center ms-5">
+                <div class="profile-photo" loading="lazy"></div>
+                <div>
+                  <p class="author-name">{{ comment.author.name }}</p>
+                  <small>{{ comment.author.job }}</small>
+                </div>
+              </div>
+            </div>
+            <p class="comment ms-5 mt-2 mb-4">{{ comment.comment }}</p>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+
+    <ng-template #noComments>
+      <small class="no-comments">Post has no comments.</small>
+    </ng-template>
+  </mat-card>
+</div>
+
+<app-loader
+  [loaderText]="'Carregando detalhes do usuário...'"
+  [loading]="loading"
+/>
