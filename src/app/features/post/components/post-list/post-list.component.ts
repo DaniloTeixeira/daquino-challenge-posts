@@ -1,8 +1,9 @@
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { Post, PostDetails } from 'src/app/core/models/post/Post';
-import { PostService } from 'src/app/core/services';
+import { Store } from '@ngrx/store';
+import { loadPostListRequest } from 'src/app/core/store/post/post.actions';
 
 @Component({
   selector: 'app-post-list',
@@ -11,11 +12,9 @@ import { PostService } from 'src/app/core/services';
 })
 export class PostListComponent implements OnInit {
   private router = inject(Router);
-  private destroyRef = inject(DestroyRef);
-  private postService = inject(PostService);
+  private store = inject(Store);
 
   post?: Post;
-  loading = false;
 
   ngOnInit(): void {
     this.getPosts();
@@ -28,16 +27,6 @@ export class PostListComponent implements OnInit {
   }
 
   private getPosts(): void {
-    this.loading = true;
-
-    this.postService
-      .getPostsFakeCall()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((post) => {
-        this.post = post;
-      })
-      .add(() => {
-        this.loading = false;
-      });
+    this.store.dispatch(loadPostListRequest());
   }
 }

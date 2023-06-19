@@ -1,0 +1,6 @@
+<div class="loader-container" *ngIf="showLoader$ | async">
+  <div class="loader-content">
+    <mat-spinner [strokeWidth]="7"></mat-spinner>
+    <p>{{ loaderText$ | async }}</p>
+  </div>
+</div>

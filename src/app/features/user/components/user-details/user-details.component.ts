@@ -2,7 +2,7 @@ import { Component, DestroyRef, inject, Input, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { Post, PostDetails } from 'src/app/core/models/post/Post';
-import { PostService } from 'src/app/core/services';
+import { PostService } from 'src/app/core/services/post';
 
 @Component({
   selector: 'app-user-details',

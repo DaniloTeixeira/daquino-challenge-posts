@@ -9,7 +9,7 @@ import { PostRoutingModule } from './post-routing.module';
 import { PostListComponent } from './components/post-list';
 import { PostDetailsComponent } from './components/post-details';
 import { RouterModule } from '@angular/router';
-import { ComponentsModule } from 'src/app/core/components/components.module';
+import { SharedModule } from '../shared/shared.module';
 
 const components = [PostListComponent, PostDetailsComponent];
 
@@ -24,7 +24,7 @@ const components = [PostListComponent, PostDetailsComponent];
     MatIconModule,
     MatButtonModule,
 
-    ComponentsModule,
+    SharedModule,
   ],
   exports: [...components],
 })
