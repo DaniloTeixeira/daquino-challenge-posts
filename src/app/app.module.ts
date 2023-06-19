@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from './features/shared/shared.module';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,6 +20,8 @@ import { SharedModule } from './features/shared/shared.module';
     RouterModule.forRoot([], {
       bindToComponentInputs: true,
     }),
+
+    StoreModule.forRoot({}, {}),
   ],
   providers: [],
   bootstrap: [AppComponent],
