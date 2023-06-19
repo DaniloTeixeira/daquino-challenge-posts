@@ -1,4 +1,4 @@
-<div class="user-container" *ngIf="postData">
+<div class="user-container" *ngIf="userPosts">
   <mat-card>
     <div class="header-content mt-3">
       <div class="author-info">
@@ -8,7 +8,7 @@
           <p class="color-accent-500">{{ post.author.job }}</p>
         </div>
       </div>
-      <a mat-button class="go-back-container" routerLink="../">
+      <a mat-button class="go-back-container p-1 me-5" routerLink="../">
         <mat-icon class="me-1">arrow_back</mat-icon>
         <small>Go back to post list</small>
       </a>
@@ -21,25 +21,25 @@
     </div>
 
     <div class="post-container">
-      <ng-container *ngFor="let data of postData">
+      <ng-container *ngFor="let post of userPosts">
         <div class="post-content">
           <div class="img-container">
-            <img [src]="data.image" />
+            <img [src]="post.image" />
           </div>
 
           <div class="d-flex flex-column justify-content-between m-3">
             <div>
-              <h5>{{ data.title }}</h5>
-              <small class="author-name">By: {{ data.author.name }}</small>
+              <h5>{{ post.title }}</h5>
+              <small class="author-name">By: {{ post.author.name }}</small>
             </div>
             <small class="body">
-              {{ data.body }}
+              {{ post.body }}
             </small>
             <div class="text-end mt-1">
               <button
                 mat-raised-button
                 color="primary"
-                (click)="goToPostDetails(data)"
+                (click)="goToPostDetails(post)"
               >
                 READ
               </button>
@@ -51,20 +51,26 @@
 
     <h6 class="mt-5">Comments from {{ post.author.name }}:</h6>
 
-    <ng-container *ngIf="post.comments.length; else noComments">
-      <ng-container *ngFor="let comment of post.comments; last as isLast">
+    <ng-container *ngIf="!userPosts[0].comments.length; else noComments">
+      <ng-container
+        *ngFor="let userPost of userPosts; index as i; last as isLast"
+      >
         <div class="author-info-container">
           <div [ngClass]="!isLast ? 'border-bottom' : ''">
             <div>
               <div class="d-flex align-items-center ms-5">
                 <div class="profile-photo" loading="lazy"></div>
                 <div>
-                  <p class="author-name">{{ comment.author.name }}</p>
-                  <small>{{ comment.author.job }}</small>
+                  <p class="author-name">
+                    {{ userPost.author.name }}
+                  </p>
+                  <small>{{ userPost.author.job }}</small>
                 </div>
               </div>
             </div>
-            <p class="comment ms-5 mt-2 mb-4">{{ comment.comment }}</p>
+            <p class="comment ms-5 mt-2 mb-4">
+              {{ userPost.comments[0].comment }}
+            </p>
           </div>
         </div>
       </ng-container>

@@ -7,13 +7,14 @@
 
 .header-content {
   display: flex;
+  align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   padding-bottom: 1rem;
   border-bottom: 1px solid $accent-200;
 }
 
 mat-card {
-  width: 90vw;
   min-height: 85vh;
   margin: 1rem;
   border-radius: 8px 8px 0 0;
@@ -24,10 +25,8 @@ mat-card {
 .go-back-container {
   display: flex;
   align-items: center;
-  margin-bottom: 1rem;
   letter-spacing: normal;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  padding: 0 2rem;
 
   small,
   mat-icon {
@@ -144,6 +143,9 @@ button {
 .comment,
 .no-comments {
   font-size: 12px;
+  padding: 1rem;
+  margin-left: 2rem;
+  color: $accent-500;
 }
 
 .author-name {
@@ -151,14 +153,19 @@ button {
 }
 
 /* Início @media */
-.post-container {
-  @media (max-width: 1300px) {
+@media (max-width: 1300px) {
+  .post-container {
     grid-template-columns: 1fr;
     place-items: center;
+    margin: 1rem;
+  }
+
+  h6 {
+    text-align: center;
   }
 }
 
-@media (max-width: 650px) {
+@media (max-width: 655px) {
   .post-content {
     grid-template-columns: 1fr;
 
@@ -176,5 +183,9 @@ button {
 
   button {
     width: 100%;
+  }
+
+  .go-back-container {
+    margin-left: 2.5rem;
   }
 }

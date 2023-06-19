@@ -6,7 +6,6 @@
 }
 
 mat-card {
-  width: 90vw;
   max-width: 900px;
   min-height: 85vh;
   margin: 1rem;
@@ -126,6 +125,9 @@ a.user-name {
 .comment,
 .no-comments {
   font-size: 12px;
+  padding: 1rem;
+  margin-left: 2rem;
+  color: $accent-500;
 }
 
 .author-name {

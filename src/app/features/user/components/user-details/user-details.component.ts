@@ -18,11 +18,10 @@ export class UserDetailsComponent implements OnInit {
 
   loading = false;
   post = history.state;
-  postData?: PostDetails[];
+  userPosts?: PostDetails[];
 
   ngOnInit(): void {
     this.getPosts();
-    console.log(this.post);
   }
 
   goToPostDetails(post: PostDetails): void {
@@ -38,18 +37,16 @@ export class UserDetailsComponent implements OnInit {
       .getPostsFakeCall()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((post) => {
-        this.setPostData(post);
+        this.filterPostDataByUser(post);
       })
       .add(() => {
         this.loading = false;
       });
   }
 
-  private setPostData(post: Post): void {
-    this.postData = post.data.filter(
+  private filterPostDataByUser(post: Post): void {
+    this.userPosts = post.data.filter(
       (user) => user.author.username === this.userName
     );
-
-    console.log(this.postData);
   }
 }

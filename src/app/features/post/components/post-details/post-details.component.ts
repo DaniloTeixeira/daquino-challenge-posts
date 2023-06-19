@@ -12,9 +12,7 @@ export class PostDetailsComponent implements OnInit {
 
   post = history.state;
 
-  ngOnInit(): void {
-    console.log(this.post);
-  }
+  ngOnInit(): void {}
 
   goToUserDetails(post: PostDetails): void {
     this.router.navigate(['/user/details', post.author.username], {
