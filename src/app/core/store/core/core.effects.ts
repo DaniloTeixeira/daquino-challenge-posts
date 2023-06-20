@@ -22,20 +22,33 @@ export class CoreEffects {
       ofType(CoreActions.loadPostListRequest),
       tap(() => this.loader.open('Loading posts...')),
       switchMap(() =>
-        this.postService.getPostsFakeCall().pipe(
-          map((post) => CoreActions.loadPostListSuccess({ payload: post })),
-          catchError(() => of(CoreActions.loadPostListError()))
-        )
+        this.postService
+          .getPostsFakeCall()
+          .pipe(
+            map((post) => CoreActions.loadPostListSuccess({ payload: post }))
+          )
+      ),
+      catchError((error) =>
+        of(CoreActions.loadPostListError({ payload: error }))
       ),
       tap(() => this.loader.close())
     )
+  );
+
+  loadPostListSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(CoreActions.loadPostListSuccess),
+        map(() => this.notification.success('Posts loaded successfully!'))
+      ),
+    { dispatch: false }
   );
 
   loadPostListError$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(CoreActions.loadPostListError),
-        map(() => this.notification.error('Error loading post list'))
+        map(({ payload }) => this.notification.error(payload))
       ),
     { dispatch: false }
   );

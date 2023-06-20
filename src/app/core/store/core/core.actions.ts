@@ -22,7 +22,10 @@ export const loadPostListSuccess = createAction(
   props<{ payload: Post }>()
 );
 
-export const loadPostListError = createAction(PostActions.LoadPostListError);
+export const loadPostListError = createAction(
+  PostActions.LoadPostListError,
+  props<{ payload: string }>()
+);
 
 export const navigateToPostDetails = createAction(
   PostActions.NavigateToPostDetails,
