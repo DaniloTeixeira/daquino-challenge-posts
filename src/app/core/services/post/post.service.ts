@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { delay, Observable, of } from 'rxjs';
-import { fakeData } from '../../data/fakeData';
+import { POSTS_DATA } from '../../data/posts-data';
 import { Post } from '../../models/post/Post';
 
 @Injectable({
@@ -11,6 +11,6 @@ export class PostService {
   getPostsFakeCall(): Observable<Post> {
     // throw new Error('');
 
-    return of(fakeData).pipe(delay(2000));
+    return of(POSTS_DATA).pipe(delay(2000));
   }
 }

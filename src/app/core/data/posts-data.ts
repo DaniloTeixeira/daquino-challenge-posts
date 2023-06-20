@@ -1,6 +1,6 @@
 import { Post } from '../models/post/Post';
 
-export const fakeData: Post = {
+export const POSTS_DATA: Post = {
   success: true,
   total: 10,
   data: [

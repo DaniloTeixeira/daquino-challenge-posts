@@ -8,7 +8,12 @@ export const selectPost = createSelector(
   (state: CoreState) => state?.post
 );
 
-export const selectSelectedPost = createSelector(
+export const selectPostDetails = createSelector(
   selectFeature,
-  (state: CoreState) => state?.selectedPost
+  (state: CoreState) => state?.postDetails
+);
+
+export const selectUserDetails = createSelector(
+  selectFeature,
+  (state: CoreState) => state?.userDetails
 );

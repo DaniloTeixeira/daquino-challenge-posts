@@ -2,7 +2,8 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { PostDetails } from 'src/app/core/models/post/Post';
-import { selectSelectedPost } from 'src/app/core/store/core/core.selectors';
+import { navigateToUserDetails } from 'src/app/core/store/core/core.actions';
+import { selectPostDetails } from 'src/app/core/store/core/core.selectors';
 
 @Component({
   selector: 'app-post-details',
@@ -13,15 +14,15 @@ export class PostDetailsComponent implements OnInit {
   store = inject(Store);
   router = inject(Router);
 
-  selectedPost$ = this.store.select(selectSelectedPost);
+  selectedPost$ = this.store.select(selectPostDetails);
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.selectedPost$.subscribe(console.log);
+  }
 
   goToUserDetails(post: PostDetails): void {
-    this.router.navigate(['/user/details', post.author.username], {
-      state: post,
-    });
-
-    console.log(post);
+    this.store.dispatch(
+      navigateToUserDetails({ payload: post.author.username })
+    );
   }
 }

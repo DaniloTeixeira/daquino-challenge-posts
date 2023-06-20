@@ -1,45 +1,47 @@
-<div class="user-container" *ngIf="userPosts">
-  <mat-card>
+<div class="user-container" *ngIf="userDetails$ | async as userDetails">
+  <mat-card *ngIf="selectedPost$ | async as selectedPost">
     <div class="header-content mt-3">
       <div class="author-info">
         <div class="profile-photo" loading="lazy"></div>
         <div>
-          <p class="color-accent-800 fw-500">{{ post.author.name }}</p>
-          <p class="color-accent-500">{{ post.author.job }}</p>
+          <p class="color-accent-800 fw-500">{{ selectedPost.author.name }}</p>
+          <p class="color-accent-500">{{ selectedPost.author.job }}</p>
         </div>
       </div>
-      <a mat-button class="go-back-container p-1 me-5" routerLink="../">
-        <mat-icon class="me-1">arrow_back</mat-icon>
+      <a mat-button class="go-back-container p-1 me-5" (click)="goToPostList()">
+        <mat-icon class="me-1 mb-1">arrow_back</mat-icon>
         <small>Go back to post list</small>
       </a>
     </div>
 
     <div class="mt-4">
       <h6 class="color-accent-800 fw-400">
-        All Posts from {{ post.author.name }}
+        All Posts from {{ selectedPost.author.name }}
       </h6>
     </div>
 
     <div class="post-container">
-      <ng-container *ngFor="let post of userPosts">
+      <ng-container *ngFor="let selectedPost of userDetails">
         <div class="post-content">
           <div class="img-container">
-            <img [src]="post.image" />
+            <img [src]="selectedPost.image" />
           </div>
 
           <div class="d-flex flex-column justify-content-between m-3">
             <div>
-              <h5>{{ post.title }}</h5>
-              <small class="author-name">By: {{ post.author.name }}</small>
+              <h5>{{ selectedPost.title }}</h5>
+              <small class="author-name"
+                >By: {{ selectedPost.author.name }}</small
+              >
             </div>
             <small class="body">
-              {{ post.body }}
+              {{ selectedPost.body }}
             </small>
             <div class="text-end mt-1">
               <button
                 mat-raised-button
                 color="primary"
-                (click)="goToPostDetails(post)"
+                (click)="goToPostDetails(selectedPost)"
               >
                 READ
               </button>
@@ -49,11 +51,11 @@
       </ng-container>
     </div>
 
-    <h6 class="mt-5">Comments from {{ post.author.name }}:</h6>
+    <h6 class="mt-5">Comments from {{ selectedPost.author.name }}:</h6>
 
-    <ng-container *ngIf="!userPosts[0].comments.length; else noComments">
+    <ng-container *ngIf="!userDetails[0].comments.length; else noComments">
       <ng-container
-        *ngFor="let userPost of userPosts; index as i; last as isLast"
+        *ngFor="let details of userDetails; index as i; last as isLast"
       >
         <div class="author-info-container">
           <div [ngClass]="!isLast ? 'border-bottom' : ''">
@@ -62,14 +64,14 @@
                 <div class="profile-photo" loading="lazy"></div>
                 <div>
                   <p class="author-name">
-                    {{ userPost.author.name }}
+                    {{ details.author.name }}
                   </p>
-                  <small>{{ userPost.author.job }}</small>
+                  <small>{{ details.author.job }}</small>
                 </div>
               </div>
             </div>
             <p class="comment ms-5 mt-2 mb-4">
-              {{ userPost.comments[0].comment }}
+              {{ details.comments[0].comment }}
             </p>
           </div>
         </div>

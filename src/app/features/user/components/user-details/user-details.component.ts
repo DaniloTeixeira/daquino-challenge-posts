@@ -1,52 +1,33 @@
-import { Component, DestroyRef, inject, Input, OnInit } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Router } from '@angular/router';
-import { Post, PostDetails } from 'src/app/core/models/post/Post';
-import { PostService } from 'src/app/core/services/post';
+import { Component, inject, Input } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { PostDetails } from 'src/app/core/models/post/Post';
+import {
+  navigateToPostDetails,
+  navigateToPostList,
+} from 'src/app/core/store/core/core.actions';
+import {
+  selectPostDetails,
+  selectUserDetails,
+} from 'src/app/core/store/core/core.selectors';
 
 @Component({
   selector: 'app-user-details',
   templateUrl: './user-details.component.html',
   styleUrls: ['./user-details.component.scss'],
 })
-export class UserDetailsComponent implements OnInit {
+export class UserDetailsComponent {
   @Input() userName?: string;
 
-  private router = inject(Router);
-  private destroyRef = inject(DestroyRef);
-  private postService = inject(PostService);
+  private store = inject(Store);
 
-  loading = false;
-  post = history.state;
-  userPosts?: PostDetails[];
-
-  ngOnInit(): void {
-    this.getPosts();
-  }
+  userDetails$ = this.store.select(selectUserDetails);
+  selectedPost$ = this.store.select(selectPostDetails);
 
   goToPostDetails(post: PostDetails): void {
-    this.router.navigate(['/post/details', post.id], {
-      state: post,
-    });
+    this.store.dispatch(navigateToPostDetails({ payload: post }));
   }
 
-  private getPosts(): void {
-    this.loading = true;
-
-    this.postService
-      .getPostsFakeCall()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((post) => {
-        this.filterPostDataByUser(post);
-      })
-      .add(() => {
-        this.loading = false;
-      });
-  }
-
-  private filterPostDataByUser(post: Post): void {
-    this.userPosts = post.data.filter(
-      (user) => user.author.username === this.userName
-    );
+  goToPostList(): void {
+    this.store.dispatch(navigateToPostList());
   }
 }

@@ -8,8 +8,9 @@ export enum PostActions {
 
   NavigateToPostDetails = '[CORE] Navigate To Post Details',
   NavigateToUserDetails = '[CORE] Navigate To User Details',
+  NavigateToPostList = '[CORE] Navigate To Post List',
 
-  SetSelectedPost = '[CORE] Set Selected Post',
+  ClearCoreState = '[CORE] Clear Core State',
 }
 
 export const loadPostListRequest = createAction(
@@ -28,7 +29,11 @@ export const navigateToPostDetails = createAction(
   props<{ payload: PostDetails }>()
 );
 
-export const setSelectedPost = createAction(
-  PostActions.SetSelectedPost,
-  props<{ payload: PostDetails }>()
+export const navigateToUserDetails = createAction(
+  PostActions.NavigateToUserDetails,
+  props<{ payload: string }>()
 );
+
+export const navigateToPostList = createAction(PostActions.NavigateToPostList);
+
+export const clearCoreState = createAction(PostActions.ClearCoreState);

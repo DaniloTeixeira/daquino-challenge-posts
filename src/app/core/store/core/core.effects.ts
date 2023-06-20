@@ -40,11 +40,34 @@ export class CoreEffects {
     { dispatch: false }
   );
 
-  navigateToPostDetails$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(CoreActions.navigateToPostDetails),
-      tap((post) => this.router.navigate(['/post/details', post.payload.id])),
-      map(({ payload }) => CoreActions.setSelectedPost({ payload }))
-    )
+  navigateToPostDetails$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(CoreActions.navigateToPostDetails),
+        tap(({ payload: { id } }) =>
+          this.router.navigate(['/post/details', id])
+        )
+      ),
+    { dispatch: false }
+  );
+
+  navigateToUserDetails$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(CoreActions.navigateToUserDetails),
+        tap(() => this.loader.open('Loagind user info...')),
+        tap(({ payload }) => this.router.navigate(['/user/details', payload])),
+        tap(() => this.loader.close())
+      ),
+    { dispatch: false }
+  );
+
+  navigateToPostList$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(CoreActions.navigateToPostList),
+        tap(() => this.router.navigate(['/post/list']))
+      ),
+    { dispatch: false }
   );
 }
