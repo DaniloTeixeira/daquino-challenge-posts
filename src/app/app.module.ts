@@ -10,6 +10,10 @@ import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './features/shared/shared.module';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { metaReducers } from './core/store/core/meta-reducers';
+import { reducers } from './core/store/core/core.reducer';
+import { CoreEffects } from './core/store/core/core.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,11 +28,10 @@ import { SharedModule } from './features/shared/shared.module';
       bindToComponentInputs: true,
     }),
 
-    StoreModule.forRoot({}, {}),
-
+    StoreModule.forRoot({ core: reducers }, { metaReducers }),
+    EffectsModule.forRoot([CoreEffects]),
     StoreDevtoolsModule.instrument(),
-
-    EffectsModule.forRoot([]),
+    StoreRouterConnectingModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],

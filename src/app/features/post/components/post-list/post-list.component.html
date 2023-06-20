@@ -1,4 +1,4 @@
-<div class="post-container" *ngIf="post">
+<div class="post-container" *ngIf="post$ | async as post">
   <ng-container *ngFor="let data of post.data">
     <mat-card>
       <div class="img-container">

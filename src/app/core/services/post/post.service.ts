@@ -11,6 +11,6 @@ export class PostService {
   getPostsFakeCall(): Observable<Post> {
     // throw new Error('');
 
-    return of(fakeData).pipe(delay(1500));
+    return of(fakeData).pipe(delay(2000));
   }
 }

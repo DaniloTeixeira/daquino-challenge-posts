@@ -1,9 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
-import { Post, PostDetails } from 'src/app/core/models/post/Post';
+import { PostDetails } from 'src/app/core/models/post/Post';
 import { Store } from '@ngrx/store';
-import { loadPostListRequest } from 'src/app/core/store/post/post.actions';
+import { selectPost } from 'src/app/core/store/core/core.selectors';
+import {
+  loadPostListRequest,
+  navigateToPostDetails,
+} from 'src/app/core/store/core/core.actions';
 
 @Component({
   selector: 'app-post-list',
@@ -11,22 +14,19 @@ import { loadPostListRequest } from 'src/app/core/store/post/post.actions';
   styleUrls: ['./post-list.component.scss'],
 })
 export class PostListComponent implements OnInit {
-  private router = inject(Router);
   private store = inject(Store);
 
-  post?: Post;
+  post$ = this.store.select(selectPost);
 
   ngOnInit(): void {
-    this.getPosts();
+    this.setPost();
   }
 
   goToPostDetails(post: PostDetails): void {
-    this.router.navigate(['/post/details', post.id], {
-      state: post,
-    });
+    this.store.dispatch(navigateToPostDetails({ payload: post }));
   }
 
-  private getPosts(): void {
+  private setPost(): void {
     this.store.dispatch(loadPostListRequest());
   }
 }

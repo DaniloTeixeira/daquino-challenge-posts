@@ -1,6 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { PostDetails } from 'src/app/core/models/post/Post';
+import { selectSelectedPost } from 'src/app/core/store/core/core.selectors';
 
 @Component({
   selector: 'app-post-details',
@@ -8,9 +10,10 @@ import { PostDetails } from 'src/app/core/models/post/Post';
   styleUrls: ['./post-details.component.scss'],
 })
 export class PostDetailsComponent implements OnInit {
+  store = inject(Store);
   router = inject(Router);
 
-  post = history.state;
+  selectedPost$ = this.store.select(selectSelectedPost);
 
   ngOnInit(): void {}
 
@@ -18,5 +21,7 @@ export class PostDetailsComponent implements OnInit {
     this.router.navigate(['/user/details', post.author.username], {
       state: post,
     });
+
+    console.log(post);
   }
 }
