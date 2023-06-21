@@ -7,7 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { PostModule } from '../post/post.module';
-import { SharedModule } from '../shared/shared.module';
+import { CoreModule } from 'src/app/core/core.module';
 
 const components = [UserDetailsComponent];
 
@@ -21,7 +21,7 @@ const components = [UserDetailsComponent];
     MatIconModule,
 
     PostModule,
-    SharedModule,
+    CoreModule,
   ],
   exports: [...components],
 })

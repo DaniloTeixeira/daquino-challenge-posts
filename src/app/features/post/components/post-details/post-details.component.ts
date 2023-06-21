@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { PostDetails } from 'src/app/core/models/post/Post';
-import { navigateToUserDetails } from 'src/app/core/store/core/core.actions';
-import { selectPostDetails } from 'src/app/core/store/core/core.selectors';
+import { navigateToUserDetails } from 'src/app/features/post/store/post.actions';
+import { PostDetails } from '../../interfaces/PostDetails';
+import { selectPostDetails } from '../../store/post.selectors';
 
 @Component({
   selector: 'app-post-details',

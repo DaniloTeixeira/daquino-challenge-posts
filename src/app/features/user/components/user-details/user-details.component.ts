@@ -1,14 +1,14 @@
 import { Component, inject, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { PostDetails } from 'src/app/core/models/post/Post';
+import { PostDetails } from 'src/app/features/post/interfaces/PostDetails';
 import {
   navigateToPostDetails,
   navigateToPostList,
-} from 'src/app/core/store/core/core.actions';
+} from 'src/app/features/post/store/post.actions';
 import {
   selectPostDetails,
   selectUserDetails,
-} from 'src/app/core/store/core/core.selectors';
+} from 'src/app/features/post/store/post.selectors';
 
 @Component({
   selector: 'app-user-details',

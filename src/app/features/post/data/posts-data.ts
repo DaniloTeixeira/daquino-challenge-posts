@@ -1,4 +1,4 @@
-import { Post } from '../models/post/Post';
+import { Post } from '../interfaces/Post';
 
 export const POSTS_DATA: Post = {
   success: true,

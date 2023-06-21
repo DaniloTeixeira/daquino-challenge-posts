@@ -11,10 +11,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { AppRoutingModule } from './app-routing.module';
-import { reducers } from './core/store/core/core.reducer';
-import { CoreEffects } from './core/store/core/core.effects';
-import { metaReducers } from './core/store/core/meta-reducers';
-import { SharedModule } from './features/shared/shared.module';
+import { metaReducers } from './core/store/meta-reducers/meta-reducers';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,14 +21,13 @@ import { SharedModule } from './features/shared/shared.module';
     BrowserAnimationsModule,
     RouterModule,
     CoreModule,
-    SharedModule,
 
     RouterModule.forRoot([], {
       bindToComponentInputs: true,
     }),
 
-    StoreModule.forRoot({ core: reducers }, { metaReducers }),
-    EffectsModule.forRoot([CoreEffects]),
+    StoreModule.forRoot({}, { metaReducers }),
+    EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument(),
     StoreRouterConnectingModule.forRoot(),
   ],

@@ -1,16 +1,16 @@
 import { inject, Injectable } from '@angular/core';
-import { NotificationService } from 'src/app/features/shared/services/notification';
-import { LoaderService } from '../../services/loader';
-import { PostService } from '../../services/post';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
-import * as CoreActions from './core.actions';
+import * as PostActions from './post.actions';
 import { Router } from '@angular/router';
+import { PostService } from 'src/app/features/post/services/post';
+import { LoaderService } from 'src/app/core/services/loader';
+import { NotificationService } from 'src/app/core/services/notification';
 
 @Injectable({
   providedIn: 'root',
 })
-export class CoreEffects {
+export class PostEffects {
   private router = inject(Router);
   private actions$ = inject(Actions);
   private loader = inject(LoaderService);
@@ -19,17 +19,17 @@ export class CoreEffects {
 
   loadPostListRequest$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(CoreActions.loadPostListRequest),
+      ofType(PostActions.loadPostListRequest),
       tap(() => this.loader.open('Loading posts...')),
       switchMap(() =>
         this.postService
           .getPostsFakeCall()
           .pipe(
-            map((post) => CoreActions.loadPostListSuccess({ payload: post }))
+            map((post) => PostActions.loadPostListSuccess({ payload: post }))
           )
       ),
       catchError((error) =>
-        of(CoreActions.loadPostListError({ payload: error }))
+        of(PostActions.loadPostListError({ payload: error }))
       ),
       tap(() => this.loader.close())
     )
@@ -38,7 +38,7 @@ export class CoreEffects {
   loadPostListSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(CoreActions.loadPostListSuccess),
+        ofType(PostActions.loadPostListSuccess),
         map(() => this.notification.success('Posts loaded successfully!'))
       ),
     { dispatch: false }
@@ -47,7 +47,7 @@ export class CoreEffects {
   loadPostListError$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(CoreActions.loadPostListError),
+        ofType(PostActions.loadPostListError),
         map(({ payload }) => this.notification.error(payload))
       ),
     { dispatch: false }
@@ -56,7 +56,7 @@ export class CoreEffects {
   navigateToPostDetails$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(CoreActions.navigateToPostDetails),
+        ofType(PostActions.navigateToPostDetails),
         tap(({ payload: { id } }) =>
           this.router.navigate(['/post/details', id])
         )
@@ -67,7 +67,7 @@ export class CoreEffects {
   navigateToUserDetails$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(CoreActions.navigateToUserDetails),
+        ofType(PostActions.navigateToUserDetails),
         tap(() => this.loader.open('Loagind user info...')),
         tap(({ payload }) => this.router.navigate(['/user/details', payload])),
         tap(() => this.loader.close())
@@ -78,7 +78,7 @@ export class CoreEffects {
   navigateToPostList$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(CoreActions.navigateToPostList),
+        ofType(PostActions.navigateToPostList),
         tap(() => this.router.navigate(['/post/list']))
       ),
     { dispatch: false }

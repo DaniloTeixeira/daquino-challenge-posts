@@ -9,7 +9,11 @@ import { PostRoutingModule } from './post-routing.module';
 import { PostListComponent } from './components/post-list';
 import { PostDetailsComponent } from './components/post-details';
 import { RouterModule } from '@angular/router';
-import { SharedModule } from '../shared/shared.module';
+import { CoreModule } from 'src/app/core/core.module';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { PostEffects } from './store/post.effects';
+import { postReducers } from './store/post.reducer';
 
 const components = [PostListComponent, PostDetailsComponent];
 
@@ -24,7 +28,10 @@ const components = [PostListComponent, PostDetailsComponent];
     MatIconModule,
     MatButtonModule,
 
-    SharedModule,
+    CoreModule,
+
+    StoreModule.forFeature('post', postReducers),
+    EffectsModule.forFeature([PostEffects]),
   ],
   exports: [...components],
 })

@@ -1,14 +1,14 @@
 import { Component, inject, OnInit } from '@angular/core';
 
-import { PostDetails } from 'src/app/core/models/post/Post';
 import { Store } from '@ngrx/store';
-import { selectPost } from 'src/app/core/store/core/core.selectors';
 import {
-  clearCoreState,
+  clearPostState,
   loadPostListRequest,
   navigateToPostDetails,
-} from 'src/app/core/store/core/core.actions';
+} from 'src/app/features/post/store/post.actions';
 import { Router } from '@angular/router';
+import { PostDetails } from '../../interfaces/PostDetails';
+import { selectPost } from '../../store/post.selectors';
 
 @Component({
   selector: 'app-post-list',
@@ -22,7 +22,7 @@ export class PostListComponent implements OnInit {
   post$ = this.store.select(selectPost);
 
   ngOnInit(): void {
-    this.clearCoreState();
+    this.clearPostState();
     this.setPost();
   }
 
@@ -30,8 +30,8 @@ export class PostListComponent implements OnInit {
     this.store.dispatch(navigateToPostDetails({ payload: post }));
   }
 
-  private clearCoreState(): void {
-    this.store.dispatch(clearCoreState());
+  private clearPostState(): void {
+    this.store.dispatch(clearPostState());
   }
 
   private setPost(): void {

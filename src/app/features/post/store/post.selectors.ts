@@ -1,19 +1,19 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { CoreState } from './core.state';
+import { PostState } from './post.state';
 
-const selectFeature = createFeatureSelector<CoreState>('core');
+const selectFeature = createFeatureSelector<PostState>('post');
 
 export const selectPost = createSelector(
   selectFeature,
-  (state: CoreState) => state?.post
+  (state: PostState) => state?.post
 );
 
 export const selectPostDetails = createSelector(
   selectFeature,
-  (state: CoreState) => state?.postDetails
+  (state: PostState) => state?.postDetails
 );
 
 export const selectUserDetails = createSelector(
   selectFeature,
-  (state: CoreState) => state?.userDetails
+  (state: PostState) => state?.userDetails
 );

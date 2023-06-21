@@ -1,16 +1,17 @@
 import { createAction, props } from '@ngrx/store';
-import { Post, PostDetails } from '../../models/post/Post';
+import { Post } from 'src/app/features/post/interfaces/Post';
+import { PostDetails } from 'src/app/features/post/interfaces/PostDetails';
 
 export enum PostActions {
-  LoadPostListRequest = '[CORE] Load Post List Request',
-  LoadPostListSuccess = '[CORE] Load post List Success',
-  LoadPostListError = '[CORE] Load Post List Error',
+  LoadPostListRequest = '[POST] Load Post List Request',
+  LoadPostListSuccess = '[POST] Load post List Success',
+  LoadPostListError = '[POST] Load Post List Error',
 
-  NavigateToPostDetails = '[CORE] Navigate To Post Details',
-  NavigateToUserDetails = '[CORE] Navigate To User Details',
-  NavigateToPostList = '[CORE] Navigate To Post List',
+  NavigateToPostDetails = '[POST] Navigate To Post Details',
+  NavigateToUserDetails = '[POST] Navigate To User Details',
+  NavigateToPostList = '[POST] Navigate To Post List',
 
-  ClearCoreState = '[CORE] Clear Core State',
+  ClearPostState = '[POST] Clear Post State',
 }
 
 export const loadPostListRequest = createAction(
@@ -39,4 +40,4 @@ export const navigateToUserDetails = createAction(
 
 export const navigateToPostList = createAction(PostActions.NavigateToPostList);
 
-export const clearCoreState = createAction(PostActions.ClearCoreState);
+export const clearPostState = createAction(PostActions.ClearPostState);
