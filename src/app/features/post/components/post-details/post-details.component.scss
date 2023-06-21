@@ -6,8 +6,8 @@
 }
 
 mat-card {
-  max-width: 900px;
-  min-height: 85vh;
+  width: 1438.03px;
+  height: 1245.86;
   margin: 1rem;
   border-radius: 8px 8px 0 0;
   border: 1px solid $accent-200;
@@ -15,7 +15,7 @@ mat-card {
 }
 
 .post-container-img {
-  height: 250px;
+  height: 420px;
   width: 100%;
   overflow: hidden;
   margin-top: 0;
@@ -36,6 +36,7 @@ h6,
 .body-container > p {
   font-size: 15px;
   color: $accent-800;
+  margin-top: 20px;
 }
 
 small,
@@ -68,7 +69,7 @@ a.user-name {
 .go-back-container {
   display: flex;
   align-items: center;
-  margin-bottom: 1rem;
+  margin: 1rem 0;
   color: $on-primary;
   letter-spacing: normal;
   font-family: Roboto, "Helvetica Neue", sans-serif;
@@ -84,7 +85,7 @@ a.user-name {
   }
 
   mat-icon {
-    font-size: 21px;
+    font-size: 22px;
   }
 }
 
@@ -92,6 +93,7 @@ a.user-name {
 .go-back-container {
   color: $on-primary;
   font-size: 12px;
+  margin-left: 20px;
 
   & a {
     margin-left: -0.5rem;

@@ -4,10 +4,9 @@ import { CommonModule } from '@angular/common';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
-import { HeaderComponent } from './components/header';
 import { LoaderComponent } from './components/loader';
 
-const components = [HeaderComponent, LoaderComponent];
+const components = [LoaderComponent];
 
 @NgModule({
   declarations: [...components],

@@ -1,27 +1,29 @@
-<div class="post-container" *ngIf="post$ | async as post">
-  <ng-container *ngFor="let data of post.data">
-    <mat-card>
-      <div class="img-container">
-        <img [src]="data.image" />
-      </div>
-      <div class="d-flex flex-column justify-content-between m-3">
-        <div>
-          <h5>{{ data.title }}</h5>
-          <small class="author-name">By: {{ data.author.name }}</small>
+<div class="d-flex align-items-center jusfify-content-center w-100">
+  <div class="post-container" *ngIf="post$ | async as post">
+    <ng-container *ngFor="let data of post.data">
+      <mat-card>
+        <div class="img-container">
+          <img [src]="data.image" />
         </div>
-        <small class="body">
-          {{ data.body }}
-        </small>
-        <div class="text-end mt-1">
-          <button
-            mat-raised-button
-            color="primary"
-            (click)="goToPostDetails(data)"
-          >
-            READ
-          </button>
+        <div class="d-flex flex-column justify-content-between m-3">
+          <div>
+            <h5 class="m-0">{{ data.title }}</h5>
+            <small class="author-name">By: {{ data.author.name }}</small>
+          </div>
+          <small class="body">
+            {{ data.body }}
+          </small>
+          <div class="text-end mb-1">
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="goToPostDetails(data)"
+            >
+              READ
+            </button>
+          </div>
         </div>
-      </div>
-    </mat-card>
-  </ng-container>
+      </mat-card>
+    </ng-container>
+  </div>
 </div>

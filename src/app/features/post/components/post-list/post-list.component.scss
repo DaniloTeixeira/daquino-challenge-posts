@@ -3,10 +3,11 @@
 .post-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  place-items: center;
   gap: 20px;
+  width: 80%;
 
-  margin: 1rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 mat-card {
@@ -20,8 +21,8 @@ mat-card {
     height: auto;
   }
 
-  max-width: 600px;
-  height: 270px;
+  max-width: 555.68px;
+  height: 206.85px;
   border: 1px solid $accent-200;
   border-radius: 8px;
   background-color: $on-primary;
@@ -30,8 +31,8 @@ mat-card {
 }
 
 .img-container {
-  height: 270px;
-  width: 270px;
+  width: 204.36px;
+  height: 204.81px;
 }
 
 img {
@@ -58,6 +59,12 @@ h5,
 
 .body {
   color: $accent-500;
+
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  white-space: pre-wrap;
 }
 
 button {
@@ -92,6 +99,7 @@ button {
   }
 
   button {
-    width: 100%;
+    width: 100% !important;
+    margin-top: 15px;
   }
 }
