@@ -10,12 +10,12 @@ import { selectPostDetails } from '../../store/post.selectors';
   styleUrls: ['./post-details.component.scss'],
 })
 export class PostDetailsComponent {
-  private store = inject(Store);
+  #store = inject(Store);
 
-  selectedPost$ = this.store.select(selectPostDetails);
+  selectedPost$ = this.#store.select(selectPostDetails);
 
   goToUserDetails(post: PostDetails): void {
-    this.store.dispatch(
+    this.#store.dispatch(
       navigateToUserDetails({ payload: post.author.username })
     );
   }

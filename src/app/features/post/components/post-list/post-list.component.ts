@@ -6,7 +6,6 @@ import {
   loadPostListRequest,
   navigateToPostDetails,
 } from 'src/app/features/post/store/post.actions';
-import { Router } from '@angular/router';
 import { PostDetails } from '../../interfaces/PostDetails';
 import { selectPost } from '../../store/post.selectors';
 
@@ -16,25 +15,24 @@ import { selectPost } from '../../store/post.selectors';
   styleUrls: ['./post-list.component.scss'],
 })
 export class PostListComponent implements OnInit {
-  private store = inject(Store);
-  private router = inject(Router);
+  #store = inject(Store);
 
-  post$ = this.store.select(selectPost);
+  post$ = this.#store.select(selectPost);
 
   ngOnInit(): void {
-    this.clearPostState();
-    this.setPost();
+    this.#clearPostState();
+    this.#setPost();
   }
 
   goToPostDetails(post: PostDetails): void {
-    this.store.dispatch(navigateToPostDetails({ payload: post }));
+    this.#store.dispatch(navigateToPostDetails({ payload: post }));
   }
 
-  private clearPostState(): void {
-    this.store.dispatch(clearPostState());
+  #clearPostState(): void {
+    this.#store.dispatch(clearPostState());
   }
 
-  private setPost(): void {
-    this.store.dispatch(loadPostListRequest());
+  #setPost(): void {
+    this.#store.dispatch(loadPostListRequest());
   }
 }

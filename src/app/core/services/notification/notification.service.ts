@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root',
 })
 export class NotificationService {
-  constructor(private matSnackBar: MatSnackBar) {}
+  #matSnackBar = inject(MatSnackBar);
 
   error(msg: string): void {
-    this.matSnackBar.open(`${msg}`, 'Close!', {
+    this.#matSnackBar.open(`${msg}`, 'Close!', {
       duration: 3000,
       horizontalPosition: 'center',
       verticalPosition: 'top',
@@ -17,7 +17,7 @@ export class NotificationService {
   }
 
   success(msg: string): void {
-    this.matSnackBar.open(`${msg}`, 'Close!', {
+    this.#matSnackBar.open(`${msg}`, 'Close!', {
       duration: 3000,
       horizontalPosition: 'center',
       verticalPosition: 'top',

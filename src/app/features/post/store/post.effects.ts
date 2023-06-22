@@ -11,18 +11,18 @@ import { NotificationService } from 'src/app/core/services/notification';
   providedIn: 'root',
 })
 export class PostEffects {
-  private router = inject(Router);
-  private actions$ = inject(Actions);
-  private loader = inject(LoaderService);
-  private postService = inject(PostService);
-  private notification = inject(NotificationService);
+  #router = inject(Router);
+  #actions$ = inject(Actions);
+  #loader = inject(LoaderService);
+  #postService = inject(PostService);
+  #notification = inject(NotificationService);
 
   loadPostListRequest$ = createEffect(() =>
-    this.actions$.pipe(
+    this.#actions$.pipe(
       ofType(PostActions.loadPostListRequest),
-      tap(() => this.loader.open('Loading posts...')),
+      tap(() => this.#loader.open('Loading posts...')),
       switchMap(() =>
-        this.postService
+        this.#postService
           .getPostsFakeCall()
           .pipe(
             map((post) => PostActions.loadPostListSuccess({ payload: post }))
@@ -31,34 +31,34 @@ export class PostEffects {
       catchError((error) =>
         of(PostActions.loadPostListError({ payload: error }))
       ),
-      tap(() => this.loader.close())
+      tap(() => this.#loader.close())
     )
   );
 
   loadPostListSuccess$ = createEffect(
     () =>
-      this.actions$.pipe(
+      this.#actions$.pipe(
         ofType(PostActions.loadPostListSuccess),
-        map(() => this.notification.success('Posts loaded successfully!'))
+        map(() => this.#notification.success('Posts loaded successfully!'))
       ),
     { dispatch: false }
   );
 
   loadPostListError$ = createEffect(
     () =>
-      this.actions$.pipe(
+      this.#actions$.pipe(
         ofType(PostActions.loadPostListError),
-        map(({ payload }) => this.notification.error(payload))
+        map(({ payload }) => this.#notification.error(payload))
       ),
     { dispatch: false }
   );
 
   navigateToPostDetails$ = createEffect(
     () =>
-      this.actions$.pipe(
+      this.#actions$.pipe(
         ofType(PostActions.navigateToPostDetails),
         tap(({ payload: { id } }) =>
-          this.router.navigate(['/post/details', id])
+          this.#router.navigate(['/post/details', id])
         )
       ),
     { dispatch: false }
@@ -66,20 +66,20 @@ export class PostEffects {
 
   navigateToUserDetails$ = createEffect(
     () =>
-      this.actions$.pipe(
+      this.#actions$.pipe(
         ofType(PostActions.navigateToUserDetails),
-        tap(() => this.loader.open('Loagind user info...')),
-        tap(({ payload }) => this.router.navigate(['/user/details', payload])),
-        tap(() => this.loader.close())
+        tap(() => this.#loader.open('Loagind user info...')),
+        tap(({ payload }) => this.#router.navigate(['/user/details', payload])),
+        tap(() => this.#loader.close())
       ),
     { dispatch: false }
   );
 
   navigateToPostList$ = createEffect(
     () =>
-      this.actions$.pipe(
+      this.#actions$.pipe(
         ofType(PostActions.navigateToPostList),
-        tap(() => this.router.navigate(['/post/list']))
+        tap(() => this.#router.navigate(['/post/list']))
       ),
     { dispatch: false }
   );

@@ -7,8 +7,8 @@ import { LoaderService } from 'src/app/core/services/loader';
   styleUrls: ['./loader.component.scss'],
 })
 export class LoaderComponent {
-  private loaderService = inject(LoaderService);
+  #loaderService = inject(LoaderService);
 
-  showLoader$ = this.loaderService.showLoader$;
-  loaderText$ = this.loaderService.loaderText$;
+  showLoader$ = this.#loaderService.showLoader$;
+  loaderText$ = this.#loaderService.loaderText$;
 }

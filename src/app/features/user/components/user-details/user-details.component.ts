@@ -18,16 +18,16 @@ import {
 export class UserDetailsComponent {
   @Input() userName?: string;
 
-  private store = inject(Store);
+  #store = inject(Store);
 
-  userDetails$ = this.store.select(selectUserDetails);
-  selectedPost$ = this.store.select(selectPostDetails);
+  userDetails$ = this.#store.select(selectUserDetails);
+  selectedPost$ = this.#store.select(selectPostDetails);
 
   goToPostDetails(post: PostDetails): void {
-    this.store.dispatch(navigateToPostDetails({ payload: post }));
+    this.#store.dispatch(navigateToPostDetails({ payload: post }));
   }
 
   goToPostList(): void {
-    this.store.dispatch(navigateToPostList());
+    this.#store.dispatch(navigateToPostList());
   }
 }
