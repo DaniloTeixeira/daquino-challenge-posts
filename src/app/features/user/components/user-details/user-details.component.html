@@ -53,7 +53,7 @@
 
     <h6 class="mt-5">Comments from {{ selectedPost.author.name }}:</h6>
 
-    <ng-container *ngIf="!userDetails[0].comments.length; else noComments">
+    <ng-container *ngIf="userDetails[0].comments.length; else noComments">
       <ng-container
         *ngFor="let details of userDetails; index as i; last as isLast"
       >
@@ -79,7 +79,7 @@
     </ng-container>
 
     <ng-template #noComments>
-      <small class="no-comments">Post has no comments.</small>
+      <small class="no-comments">User has no comments.</small>
     </ng-template>
   </mat-card>
 </div>
